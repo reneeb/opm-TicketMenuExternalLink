@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.0">
+    <CVS>$Id: TicketMenuExternalLink.sopm,v 1.1.1.1 2011/04/15 07:49:58 rb Exp $</CVS>
+    <Name>TicketMenuExternalLink</Name>
+    <Version>0.0.1</Version>
+    <Framework>3.2.x</Framework>
+    <Vendor>Perl-Services.de</Vendor>
+    <URL>http://www.perl-services.de</URL>
+    <Description Lang="de">Zeige Links auf externe Seiten im Ticketmenü</Description>
+    <Description Lang="en">Show external links in the ticket menu.</Description>
+    <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
+    <Filelist>
+        <File Permission="644" Location="Kernel/Config/Files/TicketMenuExternalLink.xml" />
+        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterTicketMenuExternalLink.pm" />
+        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterTicketMenuExternalLinkOverview.pm" />
+        <File Permission="644" Location="doc/TicketMenuExternalLink.json" />
+        <File Permission="644" Location="doc/en/TicketMenuExternalLink.pod" />
+    </Filelist>
+</otrs_package>

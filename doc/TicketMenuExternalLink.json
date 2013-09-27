@@ -1,0 +1,16 @@
+{
+    "name": "TicketMenuExternalLink",
+    "version": "0.0.1",
+    "framework": [
+        "3.2.x"
+    ],
+    "vendor": {
+        "name":  "Perl-Services.de",
+        "url": "http://www.perl-services.de"
+    },
+    "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007",
+    "description" : {
+        "en": "Show external links in the ticket menu.",
+        "de": "Zeige Links auf externe Seiten im Ticketmenü"
+    }
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<otrs_config version="1.0" init="Application">
+    <CVS>$Id: TicketMenuExternalLink.xml,v 1.1.1.1 2011/04/15 07:49:58 rb Exp $</CVS>
+    <ConfigItem Name="Frontend::Output::FilterElementPost###TicketMenuExternalLink" Required="0" Valid="1">
+        <Description Lang="en">Modul to show link to external site in ticket menu.</Description>
+        <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im Ticketmenü.</Description>
+        <Group>TicketMenuExternalLink</Group>
+        <SubGroup>OutputFilterTicketMenuExternalLink</SubGroup>
+        <Setting>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::OutputFilterTicketMenuExternalLink</Item>
+                <Item Key="Debug">0</Item>
+                <Item Key="Templates">
+                    <Hash>
+                        <Item Key="AgentTicketZoom">1</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Setting>
+    </ConfigItem>
+    <ConfigItem Name="Frontend::Output::FilterElementPost###TicketMenuExternalLinkOverview" Required="0" Valid="1">
+        <Description Lang="en">Modul to show link to external site in ticket menu (overview "large").</Description>
+        <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im Ticketmenü (Ticketübersichten "Large").</Description>
+        <Group>TicketMenuExternalLink</Group>
+        <SubGroup>OutputFilterTicketMenuExternalLink</SubGroup>
+        <Setting>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::OutputFilterTicketMenuExternalLinkOverview</Item>
+                <Item Key="Debug">0</Item>
+                <Item Key="Templates">
+                    <Hash>
+                        <Item Key="AgentTicketOverviewPreview">1</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Setting>
+    </ConfigItem>
+    <ConfigItem Name="ExternalLink::URL" Required="0" Valid="1">
+        <Description Lang="en">URL of the Link.</Description>
+        <Description Lang="de">URL des LInks.</Description>
+        <Group>TicketMenuExternalLink</Group>
+        <SubGroup>TicketLink</SubGroup>
+        <Setting>
+            <String Regex="">http://perl-services.de/test.pl?ticket_id=$LQData{"TicketID"}</String>
+        </Setting>
+    </ConfigItem>
+    <ConfigItem Name="ExternalLink::LinkName" Required="0" Valid="1">
+        <Description Lang="en">Name for the link.</Description>
+        <Description Lang="de">Name des Links.</Description>
+        <Group>TicketMenuExternalLink</Group>
+        <SubGroup>TicketLink</SubGroup>
+        <Setting>
+            <String Regex="">Perl-Services</String>
+        </Setting>
+    </ConfigItem>
+    <ConfigItem Name="ExternalLink::Attributes" Required="0" Valid="1">
+        <Description Lang="en">Attributes for the &lt;a&gt;-tag.</Description>
+        <Description Lang="de">Attribute für das &lt;a&gt;-tag.</Description>
+        <Group>TicketMenuExternalLink</Group>
+        <SubGroup>TicketLink</SubGroup>
+        <Setting>
+            <Hash>
+                <Item Key="onmouseover">window.status='$JSText{"Perl-Services"}'</Item>
+            </Hash>
+        </Setting>
+    </ConfigItem>
+</otrs_config>

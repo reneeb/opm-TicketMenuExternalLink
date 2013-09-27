@@ -1,0 +1,38 @@
+=head1 NAME
+
+TicketMenuExternalLink
+
+=head1 DESCRIPTION
+
+Imagine, you want to call an external site and pass some ticket information (like ticket number, ticket id, etc.). And you
+have to do it regularly. Then a link to that site in the ticket menu would be nice.
+
+This add on does exactly that. It adds a link to a external site in the ticket menu. You can define the link yourself.
+
+=head1 CONFIGURATION
+
+=over 4
+
+=item * ExternalLink::URL
+
+The URL of the external link.
+
+=item * ExternalLink::LinkName
+
+The name shown in the ticket menu.
+
+=item * ExternalLink::Attributes
+
+Additional attributes for the E<lt>aE<gt> tag (like I<onmouseover> etc).
+
+=back
+
+=head1 ACKNOWLEDGEMENT
+
+Development of the module I<TicketMenuExternalLink> has been sponsored by L<DENIC|http://denic.de/>.
+
+=head1 AUTHOR AND LICENSE
+
+Renee Baecker (info at perl-services.de)
+
+License: AGPL 3.0
