@@ -2,8 +2,9 @@
 <otrs_package version="1.0">
     <CVS>$Id: TicketMenuExternalLink.sopm,v 1.1.1.1 2011/04/15 07:49:58 rb Exp $</CVS>
     <Name>TicketMenuExternalLink</Name>
-    <Version>0.0.1</Version>
+    <Version>3.3.1</Version>
     <Framework>3.2.x</Framework>
+    <Framework>3.3.x</Framework>
     <Vendor>Perl-Services.de</Vendor>
     <URL>http://www.perl-services.de</URL>
     <Description Lang="de">Zeige Links auf externe Seiten im Ticketmenü</Description>
