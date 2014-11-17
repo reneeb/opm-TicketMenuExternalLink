@@ -41,7 +41,7 @@
         <Group>TicketMenuExternalLink</Group>
         <SubGroup>TicketLink</SubGroup>
         <Setting>
-            <String Regex="">http://perl-services.de/test.pl?ticket_id=$LQData{"TicketID"}</String>
+            <String Regex="">http://perl-services.de/test.pl?ticket_id=[% Data.TicketID | uri %]</String>
         </Setting>
     </ConfigItem>
     <ConfigItem Name="ExternalLink::LinkName" Required="0" Valid="1">
@@ -60,7 +60,7 @@
         <SubGroup>TicketLink</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="onmouseover">window.status='$JSText{"Perl-Services"}'</Item>
+                <Item Key="onmouseover">window.status=[% Translate("Perl-Services") | JSON %]</Item>
             </Hash>
         </Setting>
     </ConfigItem>
