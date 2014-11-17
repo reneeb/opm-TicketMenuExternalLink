@@ -1,6 +1,6 @@
 # --
 # Kernel/Output/HTML/OutputFilterTicketMenuExternalLink.pm
-# Copyright (C) 2013 Perl-Services.de, http://www.perl-services.de/
+# Copyright (C) 2013 - 2014 Perl-Services.de, http://www.perl-services.de/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -14,11 +14,7 @@ use warnings;
 
 use URI;
 
-use Kernel::System::Encode;
-use Kernel::System::Time;
-use Kernel::System::Ticket;
-
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -26,15 +22,6 @@ sub new {
     # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
-
-    # get needed objects
-    for my $Object (qw(MainObject ConfigObject LogObject LayoutObject ParamObject)) {
-        $Self->{$Object} = $Param{$Object} || die "Got no $Object!";
-    }
-
-    $Self->{EncodeObject} = $Param{EncodeObject} || Kernel::System::Encode->new( %{$Self} );
-    $Self->{TimeObject}   = $Param{TimeObject}   || Kernel::System::Time->new( %{$Self} );
-    $Self->{TicketObject} = $Param{TicketObject} || Kernel::System::Ticket->new( %{$Self} );
 
     $Self->{UserID} = $Param{UserID};
 
@@ -44,23 +31,29 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+
     # get template name
     my $Templatename = $Param{TemplateFile} || '';
     return 1 if !$Templatename;
     return 1 if $Templatename ne 'AgentTicketZoom';
 
-    my ($TicketID) = ${$Param{Data}} =~ m{<ul \s+ class="Actions" .*? TicketID=(\d+)}xms;
+    my ($TicketID) = $ParamObject->GetParam( Param => 'TicketID' );
+    #${$Param{Data}} =~ m{<ul \s+ class="Actions" .*? TicketID=(\d+)}xms;
 
     return 1 if !$TicketID;
 
-    my %Ticket = $Self->{TicketObject}->TicketGet(
+    my %Ticket = $TicketObject->TicketGet(
         TicketID => $TicketID,
         UserID   => $Self->{UserID},
     );
 
-    my $URL        = $Self->{ConfigObject}->Get( 'ExternalLink::URL' );
-    my $Attributes = $Self->{ConfigObject}->Get( 'ExternalLink::Attributes' );
-    my $LinkName   = $Self->{ConfigObject}->Get( 'ExternalLink::LinkName' );
+    my $URL        = $ConfigObject->Get( 'ExternalLink::URL' );
+    my $Attributes = $ConfigObject->Get( 'ExternalLink::Attributes' );
+    my $LinkName   = $ConfigObject->Get( 'ExternalLink::LinkName' );
 
     if ( !$LinkName ) {
         my $URI   = URI->new( $URL );
@@ -72,11 +65,11 @@ sub Run {
 
     my $LinkTemplate = qq~
         <li>
-            <a href="$URL" $AttrString>\$Text{"\$QData{"LinkName"}"}</a>
+            <a href="$URL" $AttrString>[% Data.LinkName | html %]</a>
         </li>
     ~;
 
-    my $Snippet = $Self->{LayoutObject}->Output(
+    my $Snippet = $LayoutObject->Output(
         Template => $LinkTemplate,
         Data     => {
             %ENV,
@@ -86,7 +79,7 @@ sub Run {
         },
     ); 
 
-    my $LinkType = $Self->{ConfigObject}->Get('Ticket::Frontend::MoveType');
+    my $LinkType = $ConfigObject->Get('Ticket::Frontend::MoveType');
     if ( $LinkType eq 'form' ) {
         ${ $Param{Data} } =~ s{(<li class="">\s*?<form.*?<select name="DestQueueID".*?</li>)}{$Snippet $1}ms;
     }
