@@ -31,6 +31,10 @@ Additional attributes for the E<lt>aE<gt> tag (like I<onmouseover> etc).
 
 Development of the module I<TicketMenuExternalLink> has been sponsored by L<DENIC|http://denic.de/>.
 
+=head1 REPOSITORY & BUGTRACKER
+
+The bugtracker and the code repository can be found at L<http://github.com/reneeb/TicketMenuExternalLink>
+
 =head1 AUTHOR AND LICENSE
 
 Renee Baecker (info at perl-services.de)
