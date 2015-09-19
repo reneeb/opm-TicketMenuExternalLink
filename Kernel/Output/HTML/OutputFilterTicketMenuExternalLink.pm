@@ -73,9 +73,6 @@ sub Run {
         };
     }
 
-use Data::Dumper;
-$LogObject->Log( Priority => error => Message => Dumper( \@AllLinks ) );
-
     my $StringToInclude = '';
     for my $Link ( @AllLinks ) {
         my ($LinkName, $URL, $Attributes) = @{ $Link }{ qw/LinkName URL Attributes/ };
