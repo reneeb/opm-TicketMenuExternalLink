@@ -14,6 +14,14 @@ use warnings;
 
 use URI;
 
+our @ObjectDependencies = qw(
+    Kernel::Config
+    Kernel::System::Log
+    Kernel::System::Ticket
+    Kernel::System::Web::Request
+    Kernel::Output::HTML::Layout
+);
+
 sub new {
     my ( $Type, %Param ) = @_;
 
@@ -33,6 +41,7 @@ sub Run {
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
     # get template name
     my $Templatename = $Param{TemplateFile} || '';
@@ -58,22 +67,25 @@ sub Run {
 
     if ( $URL ) {
         unshift @AllLinks, {
-            Link       => $LinkName,
+            LinkName   => $LinkName,
             URL        => $URL,
             Attributes => $Attributes,
         };
     }
 
+use Data::Dumper;
+$LogObject->Log( Priority => error => Message => Dumper( \@AllLinks ) );
+
     my $StringToInclude = '';
     for my $Link ( @AllLinks ) {
-        my ($LinkName, $URL, $Attributes) = @{ $Link }{ qw/Link URL Attributes/ };
+        my ($LinkName, $URL, $Attributes) = @{ $Link }{ qw/LinkName URL Attributes/ };
 
         if ( !$LinkName ) {
             my $URI   = URI->new( $URL );
             $LinkName = $URI->host;
         }
     
-        my $AttrString = join " ", map{ my $Value = $Attributes->{$_}; qq~$_="$Value"~ }keys %{$Attributes || {}};
+        my $AttrString = join " ", map{ my $Value = $Attributes->{$_}; qq~$_='$Value'~ }keys %{$Attributes || {}};
         $AttrString  ||= '';
     
         my $LinkTemplate = qq~

@@ -55,30 +55,50 @@ sub Run {
         my $Attributes = $ConfigObject->Get( 'ExternalLink::Attributes' );
         my $LinkName   = $ConfigObject->Get( 'ExternalLink::LinkName' );
 
-        if ( !$LinkName ) {
-            my $URI   = URI->new( $URL );
-            $LinkName = $URI->host;
+        my $MoreLinks  = $ConfigObject->Get( 'MoreExternalLinks' ) || {};
+        my @AllLinks   = map { $MoreLinks->{$_} } sort keys %{$MoreLinks};
+    
+        if ( $URL ) {
+            unshift @AllLinks, {
+                LinkName   => $LinkName,
+                URL        => $URL,
+                Attributes => $Attributes,
+            };
+        }
+    
+        my $StringToInclude = '';
+        for my $Link ( @AllLinks ) {
+            my ($LinkName, $URL, $Attributes) = @{ $Link }{ qw/LinkName URL Attributes/ };
+    
+            if ( !$LinkName ) {
+                my $URI   = URI->new( $URL );
+                $LinkName = $URI->host;
+            }
+    
+            my $AttrString = join " ", map{ my $Value = $Attributes->{$_}; qq~$_='$Value'~ }keys %{$Attributes || {}};
+            $AttrString  ||= '';
+        
+            my $LinkTemplate = qq~
+                <li>
+                    <a href="$URL" $AttrString>[% Data.LinkName | html %]</a>
+                </li>
+            ~;
+    
+            my $Snippet = $LayoutObject->Output(
+                Template => $LinkTemplate,
+                Data     => {
+                    %ENV,
+                    %Ticket,
+                    TicketID => $TicketID,
+                    LinkName => $LinkName,
+                },
+            );
+    
+            $StringToInclude .= $Snippet;
         }
 
-        my $AttrString = join " ", map{ my $Value = $Attributes->{$_}; qq~$_="$Value"~ }keys %{$Attributes || {}};
-        $AttrString  ||= '';
 
-        my $LinkTemplate = qq~
-            <li>
-                <a href="$URL" $AttrString>[% Data.LinkName | html %]</a>
-            </li>
-        ~;
-
-        my $Snippet = $LayoutObject->Output(
-            Template => $LinkTemplate,
-            Data     => {
-                %Ticket,
-                TicketID => $TicketID,
-                LinkName => $LinkName,
-            },
-        );
-
-        ${ $Param{Data} } =~ s{\Q$Block\E\K}{$Snippet}mgs;
+        ${ $Param{Data} } =~ s{\Q$Block\E\K}{$StringToInclude}mgs;
     }
 
     return ${ $Param{Data} };

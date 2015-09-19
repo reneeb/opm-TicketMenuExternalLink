@@ -6,8 +6,8 @@
         <SubGroup>TicketLink</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="URL">http://feature-addons.de</URL>
-                <Item Key="LinkName">OTRS-Erweiterungen</URL>
+                <Item Key="URL">http://feature-addons.de</Item>
+                <Item Key="LinkName">OTRS-Erweiterungen</Item>
                 <Item Key="Attributes">
                     <Hash>
                         <Item Key="onmouseover">window.status=[% Translate("Perl-Services") | JSON %]</Item>
