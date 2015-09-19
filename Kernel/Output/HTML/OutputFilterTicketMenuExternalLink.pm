@@ -1,6 +1,6 @@
 # --
 # Kernel/Output/HTML/OutputFilterTicketMenuExternalLink.pm
-# Copyright (C) 2013 - 2014 Perl-Services.de, http://www.perl-services.de/
+# Copyright (C) 2013 - 2015 Perl-Services.de, http://www.perl-services.de/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -13,8 +13,6 @@ use strict;
 use warnings;
 
 use URI;
-
-our $VERSION = 0.02;
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -55,36 +53,54 @@ sub Run {
     my $Attributes = $ConfigObject->Get( 'ExternalLink::Attributes' );
     my $LinkName   = $ConfigObject->Get( 'ExternalLink::LinkName' );
 
-    if ( !$LinkName ) {
-        my $URI   = URI->new( $URL );
-        $LinkName = $URI->host;
+    my $MoreLinks  = $ConfigObject->Get( 'MoreExternalLinks' ) || {};
+    my @AllLinks   = map { $MoreLinks->{$_} } sort keys %{$MoreLinks};
+
+    if ( $URL ) {
+        unshift @AllLinks, {
+            Link       => $LinkName,
+            URL        => $URL,
+            Attributes => $Attributes,
+        };
     }
 
-    my $AttrString = join " ", map{ my $Value = $Attributes->{$_}; qq~$_="$Value"~ }keys %{$Attributes || {}};
-    $AttrString  ||= '';
+    my $StringToInclude = '';
+    for my $Link ( @AllLinks ) {
+        my ($LinkName, $URL, $Attributes) = @{ $Link }{ qw/Link URL Attributes/ };
 
-    my $LinkTemplate = qq~
-        <li>
-            <a href="$URL" $AttrString>[% Data.LinkName | html %]</a>
-        </li>
-    ~;
+        if ( !$LinkName ) {
+            my $URI   = URI->new( $URL );
+            $LinkName = $URI->host;
+        }
+    
+        my $AttrString = join " ", map{ my $Value = $Attributes->{$_}; qq~$_="$Value"~ }keys %{$Attributes || {}};
+        $AttrString  ||= '';
+    
+        my $LinkTemplate = qq~
+            <li>
+                <a href="$URL" $AttrString>[% Data.LinkName | html %]</a>
+            </li>
+        ~;
+    
+        my $Snippet = $LayoutObject->Output(
+            Template => $LinkTemplate,
+            Data     => {
+                %ENV,
+                %Ticket,
+                TicketID => $TicketID,
+                LinkName => $LinkName,
+            },
+        ); 
 
-    my $Snippet = $LayoutObject->Output(
-        Template => $LinkTemplate,
-        Data     => {
-            %ENV,
-            %Ticket,
-            TicketID => $TicketID,
-            LinkName => $LinkName,
-        },
-    ); 
+        $StringToInclude .= $Snippet;
+    }
 
     my $LinkType = $ConfigObject->Get('Ticket::Frontend::MoveType');
     if ( $LinkType eq 'form' ) {
-        ${ $Param{Data} } =~ s{(<li class="">\s*?<form.*?<select name="DestQueueID".*?</li>)}{$Snippet $1}ms;
+        ${ $Param{Data} } =~ s{(<li class="">\s*?<form.*?<select name="DestQueueID".*?</li>)}{$StringToInclude $1}ms;
     }
     else {
-        ${ $Param{Data} } =~ s{(<li>.*?<a href=".*?Action=AgentTicketMove;TicketID=\d+;".*?</li>)}{$Snippet $1}ms;
+        ${ $Param{Data} } =~ s{(<li>.*?<a href=".*?Action=AgentTicketMove;TicketID=\d+;".*?</li>)}{$StringToInclude $1}ms;
     }
 
     return ${ $Param{Data} };

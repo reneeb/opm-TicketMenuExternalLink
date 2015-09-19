@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<otrs_config version="1.0" init="Config">
+    <ConfigItem Name="MoreExternalLinks###001-Sample" Required="0" Valid="0">
+        <Description Translatable="1">More external links.</Description>
+        <Group>TicketMenuExternalLink</Group>
+        <SubGroup>TicketLink</SubGroup>
+        <Setting>
+            <Hash>
+                <Item Key="URL">http://feature-addons.de</URL>
+                <Item Key="LinkName">OTRS-Erweiterungen</URL>
+                <Item Key="Attributes">
+                    <Hash>
+                        <Item Key="onmouseover">window.status=[% Translate("Perl-Services") | JSON %]</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Setting>
+    </ConfigItem>
+</otrs_config>

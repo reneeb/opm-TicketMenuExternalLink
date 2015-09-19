@@ -27,6 +27,11 @@ Additional attributes for the E<lt>aE<gt> tag (like I<onmouseover> etc).
 
 =back
 
+=head1 MORE LINKS
+
+As of version 4.0.2, you can define more than one external link. For that, you have to define special config options.
+You can find a sample config file at L<https://github.com/reneeb/otrs-TicketMenuExternalLink/>.
+
 =head1 ACKNOWLEDGEMENT
 
 Development of the module I<TicketMenuExternalLink> has been sponsored by L<DENIC|http://denic.de/>.
