@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<otrs_config version="1.0" init="Application">
-    <CVS>$Id: TicketMenuExternalLink.xml,v 1.1.1.1 2011/04/15 07:49:58 rb Exp $</CVS>
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="1.0" init="Config">
     <ConfigItem Name="Frontend::Output::FilterElementPost###TicketMenuExternalLink" Required="0" Valid="1">
         <Description Lang="en">Modul to show link to external site in ticket menu.</Description>
         <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im Ticketmenü.</Description>
         <Group>TicketMenuExternalLink</Group>
-        <SubGroup>OutputFilterTicketMenuExternalLink</SubGroup>
+        <SubGroup>OutputFilter</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::OutputFilterTicketMenuExternalLink</Item>
+                <Item Key="Module">Kernel::Output::HTML::FilterElementPost::TicketMenuExternalLink</Item>
                 <Item Key="Debug">0</Item>
                 <Item Key="Templates">
                     <Hash>
@@ -22,10 +21,10 @@
         <Description Lang="en">Modul to show link to external site in ticket menu (overview "large").</Description>
         <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im Ticketmenü (Ticketübersichten "Large").</Description>
         <Group>TicketMenuExternalLink</Group>
-        <SubGroup>OutputFilterTicketMenuExternalLink</SubGroup>
+        <SubGroup>OutputFilter</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::OutputFilterTicketMenuExternalLinkOverview</Item>
+                <Item Key="Module">Kernel::Output::HTML::FilterElementPost::TicketMenuExternalLinkOverview</Item>
                 <Item Key="Debug">0</Item>
                 <Item Key="Templates">
                     <Hash>
