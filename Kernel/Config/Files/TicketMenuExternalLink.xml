@@ -2,7 +2,7 @@
 <otrs_config version="1.0" init="Config">
     <ConfigItem Name="Frontend::Output::FilterElementPost###TicketMenuExternalLink" Required="0" Valid="1">
         <Description Lang="en">Modul to show link to external site in ticket menu.</Description>
-        <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im Ticketmenü.</Description>
+        <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im TicketmenÃ¼.</Description>
         <Group>TicketMenuExternalLink</Group>
         <SubGroup>OutputFilter</SubGroup>
         <Setting>
@@ -19,7 +19,7 @@
     </ConfigItem>
     <ConfigItem Name="Frontend::Output::FilterElementPost###TicketMenuExternalLinkOverview" Required="0" Valid="1">
         <Description Lang="en">Modul to show link to external site in ticket menu (overview "large").</Description>
-        <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im Ticketmenü (Ticketübersichten "Large").</Description>
+        <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im TicketmenÃ¼ (TicketÃ¼bersichten "Large").</Description>
         <Group>TicketMenuExternalLink</Group>
         <SubGroup>OutputFilter</SubGroup>
         <Setting>
@@ -54,7 +54,7 @@
     </ConfigItem>
     <ConfigItem Name="ExternalLink::Attributes" Required="0" Valid="1">
         <Description Lang="en">Attributes for the &lt;a&gt;-tag.</Description>
-        <Description Lang="de">Attribute für das &lt;a&gt;-tag.</Description>
+        <Description Lang="de">Attribute fÃ¼r das &lt;a&gt;-tag.</Description>
         <Group>TicketMenuExternalLink</Group>
         <SubGroup>TicketLink</SubGroup>
         <Setting>
