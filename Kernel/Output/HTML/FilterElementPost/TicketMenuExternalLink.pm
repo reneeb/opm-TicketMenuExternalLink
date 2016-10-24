@@ -52,6 +52,13 @@ sub Run {
 
     return 1 if !$TicketID;
 
+    my @Groups = split /\s*,\s*/, $Param{Groups} // '';
+
+    if ( @Groups ) {
+        my $Found = grep{ my $Test = $LayoutObject->{"UserIsGroup[$_]"}; $Test && lc $Test eq 'yes' }@Groups;
+        return if !$Found;
+    }
+
     my %Ticket = $TicketObject->TicketGet(
         TicketID => $TicketID,
         UserID   => $Self->{UserID},

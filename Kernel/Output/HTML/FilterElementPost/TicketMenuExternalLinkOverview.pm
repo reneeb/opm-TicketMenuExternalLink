@@ -39,6 +39,13 @@ sub Run {
     return 1 if !$Templatename;
     return 1 if $Templatename ne 'AgentTicketOverviewPreview';
 
+    my @Groups = split /\s*,\s*/, $Param{Groups} // '';
+
+    if ( @Groups ) {
+        my $Found = grep{ my $Test = $LayoutObject->{"UserIsGroup[$_]"}; $Test && lc $Test eq 'yes' }@Groups;
+        return if !$Found;
+    }
+
     for my $Block ( ${$Param{Data}} =~ m{(AgentTicketClose;TicketID=\d+ .*? </li>)}xmsg ) {
 
         my ($TicketID) = $Block =~ m{TicketID=(\d+)}xms;
