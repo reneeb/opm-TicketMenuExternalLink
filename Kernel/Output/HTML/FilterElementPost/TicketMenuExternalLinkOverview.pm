@@ -40,11 +40,23 @@ sub Run {
     return 1 if $Templatename ne 'AgentTicketOverviewPreview';
 
     my @Groups = split /\s*,\s*/, $Param{Groups} // '';
+    my $Found  = 0;
 
     if ( @Groups ) {
-        my $Found = grep{ my $Test = $LayoutObject->{"UserIsGroup[$_]"}; $Test && lc $Test eq 'yes' }@Groups;
-        return if !$Found;
+        $Found++ if grep{ my $Test = $LayoutObject->{"UserIsGroup[$_]"}; $Test && lc $Test eq 'yes' }@Groups;
     }
+
+    my @GroupsRo = split /\s*,\s*/, $Param{GroupsRo} // '';
+
+    if ( @GroupsRo ) {
+        $Found++ if grep{ my $Test = $LayoutObject->{"UserIsGroupRo[$_]"}; $Test && lc $Test eq 'yes' }@GroupsRo;
+    }
+
+    if ( !@Groups && !@GroupsRo ) {
+        $Found++;
+    }
+
+    return if !$Found;
 
     for my $Block ( ${$Param{Data}} =~ m{(AgentTicketClose;TicketID=\d+ .*? </li>)}xmsg ) {
 
