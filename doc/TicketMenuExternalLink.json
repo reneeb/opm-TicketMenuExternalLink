@@ -1,6 +1,6 @@
 {
     "name": "TicketMenuExternalLink",
-    "version": "5.0.3",
+    "version": "5.0.4",
     "framework": [
         "5.0.x"
     ],
@@ -11,6 +11,7 @@
     "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007",
     "description" : {
         "en": "Show external links in the ticket menu.",
-        "de": "Zeige Links auf externe Seiten im Ticketmenü"
+        "de": "Zeige Links auf externe Seiten im Ticketmenü.",
+        "hu": "Külső hivatkozások megjelenítése a jegymenüben."
     }
 }
