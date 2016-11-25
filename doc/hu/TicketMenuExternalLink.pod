@@ -1,0 +1,59 @@
+=head1 NÉV
+
+TicketMenuExternalLink - külső hivatkozás megjelenítése a jegymenüben.
+
+=head1 LEÍRÁS
+
+Képzelje el, hogy meg szeretne hívni egy külső oldalt, és át szeretne adni 
+neki néhány jegyinformációt (például jegyszámot, jegyazonosítót, stb.). És 
+ezt rendszeresen meg kell tennie. Ez esetben jó lenne egy arra az oldalra 
+mutató hivatkozás a jegymenüben.
+
+Ez a kiegészítő pontosan ezt csinálja. Hozzáad egy külső oldalra mutató 
+hivatkozást a jegymenühöz. Ön határozhatja meg a hivatkozást.
+
+=head1 BEÁLLÍTÁSOK
+
+=over 4
+
+=item * ExternalLink::URL
+
+A külső hivatkozás URL címe.
+
+=item * ExternalLink::LinkName
+
+A jegymenüben megjelenített név.
+
+=item * ExternalLink::Attributes
+
+További attribútumok az E<lt>aE<gt> címkéhez (mint például I<onmouseover>, stb.).
+
+=back
+
+=head1 TOVÁBBI HIVATKOZÁSOK
+
+A 4.0.2-es verziótól meghatározhat egynél több külső hivatkozást is. Ehhez meg 
+kell határoznia egy különleges konfigurációs beállítást. A 
+L<https://github.com/reneeb/otrs-TicketMenuExternalLink/blob/master/Kernel/Config/Files/ZZZTicketMenuExternalLink.xml> 
+címen találhat egy minta beállítófájlt.
+
+=head1 KÖSZÖNETNYILVÁNÍTÁS
+
+A I<TicketMenuExternalLink> modul fejlesztését a L<DENIC|http://denic.de/> 
+támogatta.
+
+=head1 KÓDTÁROLÓ ÉS HIBAKÖVETŐ
+
+A kódtároló és a hibakövető a L<https://github.com/reneeb/otrs-TicketMenuExternalLink>
+címen található.
+
+=head1 SZERZŐ ÉS LICENC
+
+Ez a modul az AGPL 3.0 szerint licencelt.
+
+Szerző: Renée Bäcker C<< <info@perl-services.de> >>
+
+=head1 MAGYAR FORDÍTÁS
+
+A magyar fordítást az OTRS-megoldások csapata készítette.
+Copyright (C) 2016 Úr Balázs, L<http://otrs-megoldasok.hu>

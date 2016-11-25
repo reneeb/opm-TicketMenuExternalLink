@@ -38,10 +38,10 @@ Development of the module I<TicketMenuExternalLink> has been sponsored by L<DENI
 
 =head1 REPOSITORY & BUGTRACKER
 
-The bugtracker and the code repository can be found at L<http://github.com/reneeb/TicketMenuExternalLink>
+The bugtracker and the code repository can be found at L<https://github.com/reneeb/otrs-TicketMenuExternalLink>
 
 =head1 AUTHOR AND LICENSE
 
-Renee Baecker (info at perl-services.de)
+This module is licensed under the terms of AGPL 3.0.
 
-License: AGPL 3.0
+Author: Renée Bäcker C<< <info@perl-services.de> >>

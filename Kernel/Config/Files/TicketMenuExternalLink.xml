@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_config version="1.0" init="Config">
     <ConfigItem Name="Frontend::Output::FilterElementPost###TicketMenuExternalLink" Required="0" Valid="1">
-        <Description Lang="en">Modul to show link to external site in ticket menu.</Description>
-        <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im Ticketmenü.</Description>
+        <Description Translatable="1">Module to show link to external site in ticket menu.</Description>
         <Group>TicketMenuExternalLink</Group>
         <SubGroup>OutputFilter</SubGroup>
         <Setting>
@@ -18,8 +17,7 @@
         </Setting>
     </ConfigItem>
     <ConfigItem Name="Frontend::Output::FilterElementPost###TicketMenuExternalLinkOverview" Required="0" Valid="1">
-        <Description Lang="en">Modul to show link to external site in ticket menu (overview "large").</Description>
-        <Description Lang="de">Modul zum Anzeigen Links auf externe Seiten im Ticketmenü (Ticketübersichten "Large").</Description>
+        <Description Translatable="1">Module to show link to external site in ticket menu (overview "large").</Description>
         <Group>TicketMenuExternalLink</Group>
         <SubGroup>OutputFilter</SubGroup>
         <Setting>
@@ -35,8 +33,7 @@
         </Setting>
     </ConfigItem>
     <ConfigItem Name="ExternalLink::URL" Required="0" Valid="1">
-        <Description Lang="en">URL of the Link.</Description>
-        <Description Lang="de">URL des LInks.</Description>
+        <Description Translatable="1">URL of the link.</Description>
         <Group>TicketMenuExternalLink</Group>
         <SubGroup>TicketLink</SubGroup>
         <Setting>
@@ -44,8 +41,7 @@
         </Setting>
     </ConfigItem>
     <ConfigItem Name="ExternalLink::LinkName" Required="0" Valid="1">
-        <Description Lang="en">Name for the link.</Description>
-        <Description Lang="de">Name des Links.</Description>
+        <Description Translatable="1">Name of the link.</Description>
         <Group>TicketMenuExternalLink</Group>
         <SubGroup>TicketLink</SubGroup>
         <Setting>
@@ -53,8 +49,7 @@
         </Setting>
     </ConfigItem>
     <ConfigItem Name="ExternalLink::Attributes" Required="0" Valid="1">
-        <Description Lang="en">Attributes for the &lt;a&gt;-tag.</Description>
-        <Description Lang="de">Attribute für das &lt;a&gt;-tag.</Description>
+        <Description Translatable="1">Attributes for the &lt;a&gt;-tag.</Description>
         <Group>TicketMenuExternalLink</Group>
         <SubGroup>TicketLink</SubGroup>
         <Setting>
