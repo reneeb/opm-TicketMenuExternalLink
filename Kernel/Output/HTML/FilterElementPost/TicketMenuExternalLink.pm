@@ -72,8 +72,9 @@ sub Run {
     return if !$Found;
 
     my %Ticket = $TicketObject->TicketGet(
-        TicketID => $TicketID,
-        UserID   => $Self->{UserID},
+        TicketID      => $TicketID,
+        DynamicFields => 1,
+        UserID        => $Self->{UserID},
     );
 
     my $URL        = $ConfigObject->Get( 'ExternalLink::URL' );
@@ -89,6 +90,14 @@ sub Run {
             URL        => $URL,
             Attributes => $Attributes,
         };
+    }
+
+    my %CustomerData;
+    if ( $ConfigObject->Get('TicketMenuExternalLink::UseCustomerData') && $Ticket{CustomerUserID} ) {
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        %CustomerData = $CustomerUserObject->CustomerUserDataGet(
+            User => $Ticket{CustomerUserID},
+        );
     }
 
     my $StringToInclude = '';
@@ -112,6 +121,7 @@ sub Run {
         my $Snippet = $LayoutObject->Output(
             Template => $LinkTemplate,
             Data     => {
+                %CustomerData,
                 %ENV,
                 %Ticket,
                 TicketID => $TicketID,
