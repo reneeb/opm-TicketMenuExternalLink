@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2013 - 2016 Perl-Services.de, http://www.perl-services.de/
+# Copyright (C) 2013 - 2017 Perl-Services.de, http://www.perl-services.de/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -12,8 +12,6 @@ use strict;
 use warnings;
 
 use URI;
-
-our $VERSION = 0.02;
 
 sub new {
     my ( $Type, %Param ) = @_;
