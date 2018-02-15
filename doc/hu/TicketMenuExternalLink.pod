@@ -36,7 +36,7 @@ További attribútumok az E<lt>aE<gt> címkéhez (mint például I<onmouseover>,
 
 A 4.0.2-es verziótól meghatározhat egynél több külső hivatkozást is. Ehhez meg 
 kell határoznia egy különleges konfigurációs beállítást. A 
-L<https://github.com/reneeb/otrs-TicketMenuExternalLink/blob/master/Kernel/Config/Files/ZZZTicketMenuExternalLink.xml> 
+L<https://github.com/reneeb/otrs-TicketMenuExternalLink/blob/master/Kernel/Config/Files/XML/ZZZTicketMenuExternalLink.xml> 
 címen találhat egy minta beállítófájlt.
 
 =head1 KÖSZÖNETNYILVÁNÍTÁS
