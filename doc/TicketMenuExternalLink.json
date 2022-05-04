@@ -1,17 +1,23 @@
 {
     "name": "TicketMenuExternalLink",
-    "version": "6.0.1",
+    "version": "6.0.2",
     "framework": [
-        "6.0.x"
+        "6.0.x",
+        "6.1.x",
+        "6.2.x",
+        "6.3.x"
     ],
     "vendor": {
         "name":  "Perl-Services.de",
-        "url": "http://www.perl-services.de"
+        "url": "https://www.perl-services.de"
     },
     "license": "GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007",
     "description" : {
         "en": "Show external links in the ticket menu.",
         "de": "Zeige Links auf externe Seiten im Ticketmenü.",
         "hu": "Külső hivatkozások megjelenítése a jegymenüben."
-    }
+    },
+    "exclude_files": [
+        "doc/TicketMenuExternalLink.json"
+    ]
 }
